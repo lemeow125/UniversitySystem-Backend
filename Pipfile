@@ -17,6 +17,8 @@ psycopg2 = "*"
 django-simple-history = "*"
 django-unfold = "*"
 django-session-jwt = "*"
+channels = {version = "*", extras = ["daphne"]}
+channels-redis = "*"
 
 [dev-packages]
 
