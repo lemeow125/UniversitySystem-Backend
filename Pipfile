@@ -1,0 +1,24 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+djangorestframework = "*"
+python-dotenv = "*"
+whitenoise = "*"
+djoser = "*"
+django-cors-headers = "*"
+drf-spectacular = {version = "*", extras = ["sidecar"]}
+django-extra-fields = "*"
+pillow = "*"
+psycopg2 = "*"
+django-simple-history = "*"
+django-unfold = "*"
+django-session-jwt = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.11"

@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  # Django Backend
+  django_backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: UniversitySystem-Backend:latest
+    ports:
+      - "8094:8000" # Expose port 8094 for the web server
+    environment:
+      - PYTHONBUFFERED=1
+    command:
+      [
+        "sh",
+        "-c",
+        "python backend/manage.py spectacular --color --file backend/schema.yml && python backend/manage.py collectstatic --noinput && python backend/manage.py makemigrations && python backend/manage.py migrate && python backend/manage.py runserver 0.0.0.0:8000",
+      ]
+    volumes:
+      - .:/code # For hotreloading
+volumes:
+  university_system:
