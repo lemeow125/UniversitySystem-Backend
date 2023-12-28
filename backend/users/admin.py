@@ -9,11 +9,12 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
     # Shown in Django Admin List
-    list_display = UserAdmin.list_display + \
-        ('id','is_banned','is_superuser','is_teacher','is_student')
+    list_display = ('id', 'full_name', 'username', 'is_banned', 'is_superuser',
+                    'is_teacher', 'is_student')
     # Editable fields per instance
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('is_banned','is_teacher','is_student')}),
+        (None, {'fields': ('is_banned', 'is_teacher', 'is_student')}),
     )
+
 
 admin.site.register(CustomUser, CustomUserAdmin)
