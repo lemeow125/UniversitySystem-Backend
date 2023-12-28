@@ -10,7 +10,7 @@ class CustomUserAdmin(UserAdmin):
 
     # Shown in Django Admin List
     list_display = ('id', 'full_name', 'username', 'is_banned', 'is_superuser',
-                    'is_teacher', 'is_student')
+                    'is_staff', 'is_employee', 'is_student')
     # Editable fields per instance
     fieldsets = UserAdmin.fieldsets + (
         (None, {'fields': ('is_banned', 'is_teacher', 'is_student')}),

@@ -16,7 +16,7 @@ class CustomUser(AbstractUser):
     is_banned = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
     is_student = models.BooleanField(default=True)
-    is_teacher = models.BooleanField(default=False)
+    is_employee = models.BooleanField(default=False)
     student_id = models.IntegerField(null=True, unique=True)
     contact_number = models.BigIntegerField(null=True)
     avatar = ResizedImageField(null=True, force_format="WEBP", quality=100)
@@ -39,7 +39,7 @@ def create_superuser(sender, **kwargs):
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_student': False,
-                'is_teacher': False,
+                'is_employee': False,
                 'is_staff': True,
                 'is_superuser': True,
                 'student_id': None
@@ -50,7 +50,7 @@ def create_superuser(sender, **kwargs):
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_student': True,
-                'is_teacher': False,
+                'is_employee': False,
                 'is_staff': False,
                 'is_superuser': False,
                 'student_id': 1
