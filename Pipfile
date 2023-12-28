@@ -19,6 +19,7 @@ django-unfold = "*"
 django-session-jwt = "*"
 channels = {version = "*", extras = ["daphne"]}
 channels-redis = "*"
+drf-extra-fields = "*"
 
 [dev-packages]
 

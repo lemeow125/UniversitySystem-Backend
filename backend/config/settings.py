@@ -1,9 +1,9 @@
 from datetime import timedelta
 from pathlib import Path
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
 import os
 
-load_dotenv() 
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -18,7 +18,7 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = [] # TODO: Add frontend URLs here
+CSRF_TRUSTED_ORIGINS = []  # TODO: Add frontend URLs here
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
@@ -184,6 +184,7 @@ SPECTACULAR_SETTINGS = {
     'SWAGGER_UI_DIST': 'SIDECAR',
     'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
     'REDOC_DIST': 'SIDECAR',
+    'COMPONENT_SPLIT_REQUEST': True
     # OTHER SETTINGS
 }
 
@@ -212,7 +213,7 @@ DJANGO_SESSION_JWT = {
     'KEY': os.getenv('SECRET_KEY'),
     'SESSION_FIELD': 'sk',
 }
-SESSION_COOKIE_NAME='sessionid'
+SESSION_COOKIE_NAME = 'sessionid'
 
 # Redis Cache for Django Channel Websockets
 CHANNEL_LAYERS = {

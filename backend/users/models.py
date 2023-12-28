@@ -16,6 +16,7 @@ class CustomUser(AbstractUser):
     is_student = models.BooleanField(default=True)
     is_teacher = models.BooleanField(default=False)
     student_id = models.IntegerField(null=True, unique=True)
+    avatar = models.ImageField(null=True)
 
     @property
     def full_name(self):

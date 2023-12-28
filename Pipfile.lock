@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0977ec72d21c106e78b3941793ea443b1a890ef10eb793bbf9d033d6c3a65b01"
+            "sha256": "f77fb1797b9f1e404d5dac248a071d62f40d73c07981724b8c9ce3f11a64ab73"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -397,6 +397,14 @@
             "markers": "python_version >= '3.5' and python_version < '4.0'",
             "version": "==1.3.1"
         },
+        "drf-extra-fields": {
+            "hashes": [
+                "sha256:3f3b1a6ec0eea02c9cabd62fe10e1673e1e42c5daa27fa9d4cea758c52c5cc30",
+                "sha256:d7e58b8f60432233328b8a64831e50ea5d05932d3cb63ade8fe66c0d3d21ac5b"
+            ],
+            "index": "pypi",
+            "version": "==3.7.0"
+        },
         "drf-spectacular": {
             "extras": [
                 "sidecar"
@@ -414,6 +422,13 @@
                 "sha256:65ac53674377691636722ec1a9b71f12203b483a90ae5f1afc5d216269eb299a"
             ],
             "version": "==2023.12.1"
+        },
+        "filetype": {
+            "hashes": [
+                "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb",
+                "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"
+            ],
+            "version": "==1.2.0"
         },
         "gitdb": {
             "hashes": [
@@ -899,11 +914,11 @@
         },
         "python-gitlab": {
             "hashes": [
-                "sha256:f870d76f98c95d05c43399d73b1eaab59c671b32793830cd2f9ddf32cc93541e",
-                "sha256:fa265266f24740ee654de51860ff78c9c3e422bb8a8c7ea8eedf353c75f57609"
+                "sha256:cc1dc49c562c02ffbad3656e668234c45ea6210688ade59865b284313f45000d",
+                "sha256:eb31d1f2bfd8653f74996f9d0bf84ce7afb0843f9122a257c9a93b0e027d1df0"
             ],
             "markers": "python_full_version >= '3.8.0'",
-            "version": "==4.2.0"
+            "version": "==4.3.0"
         },
         "python-semantic-release": {
             "hashes": [
