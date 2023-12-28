@@ -1,8 +1,10 @@
 from django.contrib.auth.models import AbstractUser
+from django_resized import ResizedImageField
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 import os
+
 
 class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=100)
@@ -16,7 +18,8 @@ class CustomUser(AbstractUser):
     is_student = models.BooleanField(default=True)
     is_teacher = models.BooleanField(default=False)
     student_id = models.IntegerField(null=True, unique=True)
-    avatar = models.ImageField(null=True)
+    contact_number = models.BigIntegerField(null=True)
+    avatar = ResizedImageField(null=True, force_format="WEBP", quality=100)
 
     @property
     def full_name(self):
@@ -36,9 +39,9 @@ def create_superuser(sender, **kwargs):
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_student': False,
-                'is_teacher':False,
+                'is_teacher': False,
                 'is_staff': True,
-                'is_superuser':True,
+                'is_superuser': True,
                 'student_id': None
             },
             # Debug Student
@@ -47,9 +50,9 @@ def create_superuser(sender, **kwargs):
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
                 'is_student': True,
-                'is_teacher':False,
+                'is_teacher': False,
                 'is_staff': False,
-                'is_superuser':False,
+                'is_superuser': False,
                 'student_id': 1
             },
         ]
@@ -67,5 +70,4 @@ def create_superuser(sender, **kwargs):
                 USER.is_superuser = user['is_superuser']
                 USER.student_id = user['student_id']
                 USER.save()
-                print('Created User:',user['username'])
-
+                print('Created User:', user['username'])
