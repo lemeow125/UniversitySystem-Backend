@@ -6,9 +6,9 @@ from django.utils.timezone import now
 
 class EnrollmentEntry(models.Model):
     student = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE)
+        CustomUser, on_delete=models.PROTECT)
     course = models.ForeignKey(
-        Course, on_delete=models.CASCADE)
+        Course, on_delete=models.PROTECT)
     timestamp = models.DateTimeField(default=now, editable=False)
 
     def __str__(self):

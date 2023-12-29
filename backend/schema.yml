@@ -214,7 +214,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CustomUserRequest'
-        required: true
       security:
       - jwtAuth: []
       responses:
@@ -327,7 +326,6 @@ paths:
           multipart/form-data:
             schema:
               $ref: '#/components/schemas/CustomUserRequest'
-        required: true
       security:
       - jwtAuth: []
       responses:
@@ -836,9 +834,11 @@ components:
       properties:
         first_name:
           type: string
+          nullable: true
           maxLength: 100
         last_name:
           type: string
+          nullable: true
           maxLength: 100
         email:
           type: string
@@ -856,17 +856,17 @@ components:
           format: uri
       required:
       - email
-      - first_name
-      - last_name
     CustomUserRequest:
       type: object
       properties:
         first_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         last_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         contact_number:
@@ -878,9 +878,6 @@ components:
         avatar:
           type: string
           format: binary
-      required:
-      - first_name
-      - last_name
     EnrollmentEntry:
       type: object
       properties:
@@ -934,10 +931,12 @@ components:
       properties:
         first_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         last_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         contact_number:
@@ -1077,26 +1076,28 @@ components:
       properties:
         first_name:
           type: string
+          nullable: true
           maxLength: 100
         last_name:
           type: string
+          nullable: true
           maxLength: 100
         email:
           type: string
           format: email
       required:
       - email
-      - first_name
-      - last_name
     UserRegistrationRequest:
       type: object
       properties:
         first_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         last_name:
           type: string
+          nullable: true
           minLength: 1
           maxLength: 100
         email:
@@ -1105,8 +1106,6 @@ components:
           minLength: 1
       required:
       - email
-      - first_name
-      - last_name
     UsernameResetConfirm:
       type: object
       properties:

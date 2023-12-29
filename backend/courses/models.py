@@ -9,7 +9,7 @@ class Course(models.Model):
     name = models.TextField()
     code = models.TextField()
     curriculum = models.ForeignKey(
-        Curriculum, on_delete=models.CASCADE)
+        Curriculum, on_delete=models.PROTECT)
     timestamp = models.DateTimeField(default=now, editable=False)
 
     def __str__(self):
