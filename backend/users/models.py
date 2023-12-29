@@ -7,8 +7,8 @@ import os
 
 
 class CustomUser(AbstractUser):
-    first_name = models.CharField(max_length=100)
-    last_name = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100, null=True, default=None)
+    last_name = models.CharField(max_length=100, null=True, default=None)
     # email inherited from base user class
     # username inherited from base user class
     # password inherited from base user class
@@ -19,7 +19,8 @@ class CustomUser(AbstractUser):
     is_employee = models.BooleanField(default=False)
     student_id = models.IntegerField(null=True, unique=True)
     contact_number = models.BigIntegerField(null=True)
-    avatar = ResizedImageField(null=True, force_format="WEBP", quality=100)
+    avatar = ResizedImageField(
+        null=True, force_format="WEBP", quality=100, upload_to='avatars/')
 
     @property
     def full_name(self):
@@ -42,7 +43,9 @@ def create_superuser(sender, **kwargs):
                 'is_employee': False,
                 'is_staff': True,
                 'is_superuser': True,
-                'student_id': None
+                'student_id': None,
+                'first_name': None,
+                'last_name': None
             },
             # Debug Student
             {
@@ -53,7 +56,9 @@ def create_superuser(sender, **kwargs):
                 'is_employee': False,
                 'is_staff': False,
                 'is_superuser': False,
-                'student_id': 1
+                'student_id': 1,
+                'first_name': "Test",
+                'last_name': "Student"
             },
         ]
 
@@ -62,7 +67,9 @@ def create_superuser(sender, **kwargs):
                 USER = CustomUser.objects.create_user(
                     username=user['username'],
                     password=user['password'],
-                    email=user['email']
+                    email=user['email'],
+                    first_name=user['first_name'],
+                    last_name=user['last_name'],
                 )
                 USER.is_active = True
                 USER.is_student = user['is_student']

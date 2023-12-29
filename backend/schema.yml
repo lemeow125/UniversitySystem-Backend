@@ -2,8 +2,24 @@ openapi: 3.0.3
 info:
   title: University System Backend
   version: 1.0.0
-  description: A project by Keannu Bernasol
+  description: An open source project
 paths:
+  /api/v1/accounts/employees/:
+    get:
+      operationId: api_v1_accounts_employees_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
+          description: ''
   /api/v1/accounts/jwt/create/:
     post:
       operationId: api_v1_accounts_jwt_create_create
@@ -81,6 +97,38 @@ paths:
       responses:
         '200':
           description: No response body
+  /api/v1/accounts/students/:
+    get:
+      operationId: api_v1_accounts_students_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
+          description: ''
+  /api/v1/accounts/teachers/:
+    get:
+      operationId: api_v1_accounts_teachers_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomUser'
+          description: ''
   /api/v1/accounts/users/:
     get:
       operationId: api_v1_accounts_users_list
@@ -509,6 +557,70 @@ paths:
               schema:
                 $ref: '#/components/schemas/SetUsername'
           description: ''
+  /api/v1/courses/:
+    get:
+      operationId: api_v1_courses_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Course'
+          description: ''
+  /api/v1/curriculums/:
+    get:
+      operationId: api_v1_curriculums_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Curriculum'
+          description: ''
+  /api/v1/enrollment_entries/:
+    get:
+      operationId: api_v1_enrollment_entries_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
+  /api/v1/enrollment_entries/self/:
+    get:
+      operationId: api_v1_enrollment_entries_self_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
   /schema/:
     get:
       operationId: schema_retrieve
@@ -678,6 +790,47 @@ components:
       required:
       - token
       - uid
+    Course:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 64
+        code:
+          type: string
+          maxLength: 32
+        curriculum:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - code
+      - curriculum
+      - id
+      - name
+      - timestamp
+    Curriculum:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 64
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - id
+      - name
+      - timestamp
     CustomUser:
       type: object
       properties:
@@ -728,6 +881,25 @@ components:
       required:
       - first_name
       - last_name
+    EnrollmentEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        student:
+          type: integer
+        course:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - course
+      - id
+      - student
+      - timestamp
     PasswordResetConfirm:
       type: object
       properties:
