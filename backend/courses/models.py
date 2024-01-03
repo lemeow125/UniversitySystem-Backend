@@ -31,12 +31,12 @@ def create_superuser(sender, **kwargs):
         for course in courses:
             CURRICULUM = Curriculum.objects.filter(
                 name=course['curriculum']).first()
-            if not Course.objects.filter(name=course['name']).filter(code=course['code']).filter(curriculum=CURRICULUM).exists():
+            if not Course.objects.filter(name=course['name']).filter(code=course['code'], curriculum=CURRICULUM).exists():
                 COURSE = Course.objects.create(
                     name=course['name'],
                     code=course['code'],
                     curriculum=CURRICULUM
                 )
 
-                print('Created course:',
+                print('Created Course:',
                       course['name'], 'under curriculum', course['curriculum'])

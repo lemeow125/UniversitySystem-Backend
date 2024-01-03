@@ -27,4 +27,4 @@ def create_superuser(sender, **kwargs):
                 COURSE = Curriculum.objects.create(
                     name=curriculum['name'],
                 )
-                print('Created curriculum:', curriculum['name'])
+                print('Created Curriculum:', curriculum['name'])
