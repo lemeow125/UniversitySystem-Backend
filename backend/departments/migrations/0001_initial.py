@@ -13,10 +13,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Curriculum',
+            name='Department',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.TextField()),
+                ('name', models.CharField(max_length=64)),
                 ('timestamp', models.DateTimeField(default=django.utils.timezone.now, editable=False)),
             ],
         ),

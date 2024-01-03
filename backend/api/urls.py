@@ -7,5 +7,7 @@ urlpatterns = [
     path('curriculums/', include('curriculums.urls')),
     path('courses/', include('courses.urls')),
     path('enrollment_entries/', include('enrollment_entries.urls')),
+    path('departments/', include('departments.urls')),
+    path('employment_entries/', include('employment_entries.urls')),
     path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
 ]

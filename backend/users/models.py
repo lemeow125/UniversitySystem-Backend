@@ -15,8 +15,6 @@ class CustomUser(AbstractUser):
     # is_admin inherited from base user class
     is_banned = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=True)
-    is_employee = models.BooleanField(default=False)
     student_id = models.IntegerField(null=True, unique=True)
     contact_number = models.BigIntegerField(null=True)
     avatar = ResizedImageField(
@@ -25,6 +23,15 @@ class CustomUser(AbstractUser):
     @property
     def full_name(self):
         return f"{self.first_name} {self.last_name}"
+
+    @property
+    def is_employee(self):
+        return self.employmententry_set.exists()
+
+    @property
+    def is_student(self):
+        return self.enrollmententry_set.exists()
+
     pass
 
 
@@ -39,8 +46,6 @@ def create_superuser(sender, **kwargs):
                 'username': os.getenv('DJANGO_ADMIN_USERNAME'),
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
-                'is_student': False,
-                'is_employee': False,
                 'is_staff': True,
                 'is_superuser': True,
                 'student_id': None,
@@ -52,13 +57,44 @@ def create_superuser(sender, **kwargs):
                 'username': 'debug-student',
                 'email': os.getenv('DJANGO_ADMIN_EMAIL'),
                 'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
-                'is_student': True,
-                'is_employee': False,
                 'is_staff': False,
                 'is_superuser': False,
                 'student_id': 1,
                 'first_name': "Test",
                 'last_name': "Student"
+            },
+            # Debug Professor
+            {
+                'username': 'debug-employee-professor',
+                'email': os.getenv('DJANGO_ADMIN_EMAIL'),
+                'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
+                'is_staff': False,
+                'is_superuser': False,
+                'student_id': None,
+                'first_name': "Test",
+                'last_name': "Employee"
+            },
+            # Debug Hiring Staff
+            {
+                'username': 'debug-employee-hiringstaff',
+                'email': os.getenv('DJANGO_ADMIN_EMAIL'),
+                'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
+                'is_staff': False,
+                'is_superuser': False,
+                'student_id': None,
+                'first_name': "Test",
+                'last_name': "Employee"
+            },
+            # Debug Enrollment Staff
+            {
+                'username': 'debug-employee-enrollmentstaff',
+                'email': os.getenv('DJANGO_ADMIN_EMAIL'),
+                'password': os.getenv('DJANGO_ADMIN_PASSWORD'),
+                'is_staff': False,
+                'is_superuser': False,
+                'student_id': None,
+                'first_name': "Test",
+                'last_name': "Employee"
             },
         ]
 
@@ -72,8 +108,6 @@ def create_superuser(sender, **kwargs):
                     last_name=user['last_name'],
                 )
                 USER.is_active = True
-                USER.is_student = user['is_student']
-                USER.is_staff = user['is_staff']
                 USER.is_superuser = user['is_superuser']
                 USER.student_id = user['student_id']
                 USER.save()

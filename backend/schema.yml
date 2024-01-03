@@ -587,6 +587,179 @@ paths:
                 items:
                   $ref: '#/components/schemas/Curriculum'
           description: ''
+  /api/v1/departments/:
+    get:
+      operationId: api_v1_departments_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Department'
+          description: ''
+  /api/v1/employment_entries/:
+    get:
+      operationId: api_v1_employment_entries_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
+    post:
+      operationId: api_v1_employment_entries_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
+  /api/v1/employment_entries/{id}/:
+    get:
+      operationId: api_v1_employment_entries_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this employment entry.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
+    put:
+      operationId: api_v1_employment_entries_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this employment entry.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EmploymentEntryRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
+    patch:
+      operationId: api_v1_employment_entries_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this employment entry.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEmploymentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEmploymentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEmploymentEntryRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
+    delete:
+      operationId: api_v1_employment_entries_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this employment entry.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
+  /api/v1/employment_entries/self/:
+    get:
+      operationId: api_v1_employment_entries_self_list
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmploymentEntry'
+          description: ''
   /api/v1/enrollment_entries/:
     get:
       operationId: api_v1_enrollment_entries_list
@@ -603,6 +776,131 @@ paths:
                 items:
                   $ref: '#/components/schemas/EnrollmentEntry'
           description: ''
+    post:
+      operationId: api_v1_enrollment_entries_create
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
+  /api/v1/enrollment_entries/{id}/:
+    get:
+      operationId: api_v1_enrollment_entries_retrieve
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this enrollment entry.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
+    put:
+      operationId: api_v1_enrollment_entries_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this enrollment entry.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/EnrollmentEntryRequest'
+        required: true
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
+    patch:
+      operationId: api_v1_enrollment_entries_partial_update
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this enrollment entry.
+        required: true
+      tags:
+      - api
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedEnrollmentEntryRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedEnrollmentEntryRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedEnrollmentEntryRequest'
+      security:
+      - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnrollmentEntry'
+          description: ''
+    delete:
+      operationId: api_v1_enrollment_entries_destroy
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: integer
+        description: A unique integer value identifying this enrollment entry.
+        required: true
+      tags:
+      - api
+      security:
+      - jwtAuth: []
+      responses:
+        '204':
+          description: No response body
   /api/v1/enrollment_entries/self/:
     get:
       operationId: api_v1_enrollment_entries_self_list
@@ -878,6 +1176,53 @@ components:
         avatar:
           type: string
           format: binary
+    Department:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 64
+      required:
+      - id
+      - name
+    EmploymentEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        employee:
+          type: integer
+        department:
+          type: integer
+        salary:
+          type: number
+          format: double
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - department
+      - employee
+      - id
+      - timestamp
+    EmploymentEntryRequest:
+      type: object
+      properties:
+        employee:
+          type: integer
+        department:
+          type: integer
+        salary:
+          type: number
+          format: double
+      required:
+      - department
+      - employee
     EnrollmentEntry:
       type: object
       properties:
@@ -897,6 +1242,16 @@ components:
       - id
       - student
       - timestamp
+    EnrollmentEntryRequest:
+      type: object
+      properties:
+        student:
+          type: integer
+        course:
+          type: integer
+      required:
+      - course
+      - student
     PasswordResetConfirm:
       type: object
       properties:
@@ -948,6 +1303,23 @@ components:
         avatar:
           type: string
           format: binary
+    PatchedEmploymentEntryRequest:
+      type: object
+      properties:
+        employee:
+          type: integer
+        department:
+          type: integer
+        salary:
+          type: number
+          format: double
+    PatchedEnrollmentEntryRequest:
+      type: object
+      properties:
+        student:
+          type: integer
+        course:
+          type: integer
     SendEmailReset:
       type: object
       properties:
