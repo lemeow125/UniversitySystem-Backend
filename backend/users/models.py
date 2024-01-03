@@ -109,18 +109,17 @@ def create_superuser(sender, **kwargs):
                         username=user['username'],
                         password=user['password'],
                         email=user['email'],
-                        first_name=user['first_name'],
-                        last_name=user['last_name'],
                     )
+                    print('Created Superuser:', user['username'])
                 else:
                     USER = CustomUser.objects.create_user(
                         username=user['username'],
                         password=user['password'],
                         email=user['email'],
-                        first_name=user['first_name'],
-                        last_name=user['last_name'],
                     )
+                    print('Created User:', user['username'])
+                USER.first_name = user['first_name']
+                USER.last_name = user['last_name']
                 USER.is_active = True
                 USER.student_id = user['student_id']
                 USER.save()
-                print('Created User:', user['username'])
