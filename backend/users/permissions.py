@@ -32,9 +32,7 @@ class IsHiringStaff(BasePermission):
 
 
 class IsHiringStaffOrReadOnly(BasePermission):
-    """
-    The request is authenticated as hiring staff, or is a read-only request.
-    """
+    message = "You must be hiring staff to perform this action."
 
     def has_permission(self, request, view):
         return bool(
@@ -56,6 +54,7 @@ class IsEnrollmentStaff(BasePermission):
 
 
 class IsEnrollmentStaffOrReadOnly(BasePermission):
+    message = "You must be a enrollment staff to perform this action."
 
     def has_permission(self, request, view):
         return bool(

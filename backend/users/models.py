@@ -32,6 +32,10 @@ class CustomUser(AbstractUser):
     def is_student(self):
         return self.enrollmententry_set.exists()
 
+    @property
+    def is_employee(self):
+        return self.employmententry_set.exists()
+
     pass
 
 
@@ -100,15 +104,23 @@ def create_superuser(sender, **kwargs):
 
         for user in users:
             if not CustomUser.objects.filter(username=user['username']).exists():
-                USER = CustomUser.objects.create_user(
-                    username=user['username'],
-                    password=user['password'],
-                    email=user['email'],
-                    first_name=user['first_name'],
-                    last_name=user['last_name'],
-                )
+                if (user['is_superuser']):
+                    USER = CustomUser.objects.create_superuser(
+                        username=user['username'],
+                        password=user['password'],
+                        email=user['email'],
+                        first_name=user['first_name'],
+                        last_name=user['last_name'],
+                    )
+                else:
+                    USER = CustomUser.objects.create_user(
+                        username=user['username'],
+                        password=user['password'],
+                        email=user['email'],
+                        first_name=user['first_name'],
+                        last_name=user['last_name'],
+                    )
                 USER.is_active = True
-                USER.is_superuser = user['is_superuser']
                 USER.student_id = user['student_id']
                 USER.save()
                 print('Created User:', user['username'])
