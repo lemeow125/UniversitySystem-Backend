@@ -3,6 +3,7 @@ from django_resized import ResizedImageField
 from django.db import models
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
+from django.urls import reverse
 import os
 
 
@@ -19,6 +20,13 @@ class CustomUser(AbstractUser):
     contact_number = models.BigIntegerField(null=True)
     avatar = ResizedImageField(
         null=True, force_format="WEBP", quality=100, upload_to='avatars/')
+
+    def avatar_url(self):
+        return f'/api/v1/media/avatars/{self.avatar.field.storage.name(self.avatar.path)}'
+
+    @property
+    def admin_url(self):
+        return reverse('admin:users_customuser_change', args=(self.pk,))
 
     @property
     def full_name(self):

@@ -1,5 +1,6 @@
 from django.urls import path, include
-from django.contrib.staticfiles.views import serve
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from config import settings
 
 urlpatterns = [
@@ -9,5 +10,12 @@ urlpatterns = [
     path('enrollment_entries/', include('enrollment_entries.urls')),
     path('departments/', include('departments.urls')),
     path('employment_entries/', include('employment_entries.urls')),
-    path('media/<path:path>/', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
+
+# Serving media files
+# Only used in development
+# Use Nginx for serving media files in production!
+if settings.DEBUG:
+    urlpatterns += staticfiles_urlpatterns()
+    urlpatterns += static(
+        'media/', document_root=settings.MEDIA_ROOT)

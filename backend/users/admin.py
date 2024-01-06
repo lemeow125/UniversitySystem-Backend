@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
                     'is_staff', 'is_employee', 'is_student')
     # Editable fields per instance
     fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('is_banned',)}),
+        (None, {'fields': ('is_banned', 'avatar',)}),
     )
 
 
