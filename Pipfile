@@ -23,6 +23,7 @@ drf-extra-fields = "*"
 django-resized = "*"
 daphne = "*"
 django-redis = "*"
+django-debug-toolbar = "*"
 
 [dev-packages]
 

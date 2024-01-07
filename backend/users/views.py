@@ -1,9 +1,8 @@
 from users.models import CustomUser
-from users.permissions import IsStudent
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 from users.serializers import CustomUserSerializer
-from rest_framework.response import Response
+from django.core.cache import cache
 
 
 class TeacherViewSet(generics.ListAPIView):
@@ -13,7 +12,12 @@ class TeacherViewSet(generics.ListAPIView):
     serializer_class = CustomUserSerializer
 
     def get_queryset(self):
-        return CustomUser.objects.filter(is_teacher=True)
+        key = 'teachers'
+        queryset = cache.get(key)
+        if not queryset:
+            queryset = CustomUser.objects.filter(is_teacher=True)
+            cache.set(key, queryset, 60*60)  # Cache for an hour
+        return queryset
 
 
 class StudentViewSet(generics.ListAPIView):
@@ -23,7 +27,12 @@ class StudentViewSet(generics.ListAPIView):
     serializer_class = CustomUserSerializer
 
     def get_queryset(self):
-        return CustomUser.objects.filter(is_student=True)
+        key = 'students'
+        queryset = cache.get(key)
+        if not queryset:
+            queryset = CustomUser.objects.filter(is_student=True)
+            cache.set(key, queryset, 60*60)  # Cache for an hour
+        return queryset
 
 
 class EmployeeViewSet(generics.ListAPIView):
@@ -33,4 +42,9 @@ class EmployeeViewSet(generics.ListAPIView):
     serializer_class = CustomUserSerializer
 
     def get_queryset(self):
-        return CustomUser.objects.filter(is_employee=True)
+        key = 'employees'
+        queryset = cache.get(key)
+        if not queryset:
+            queryset = CustomUser.objects.filter(is_employee=True)
+            cache.set(key, queryset, 60*60)  # Cache for an hour
+        return queryset
