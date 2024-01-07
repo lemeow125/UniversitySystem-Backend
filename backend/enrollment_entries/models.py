@@ -20,8 +20,8 @@ class EnrollmentEntry(models.Model):
 
     def save(self, *args, **kwargs):
         # Cache invalidation on changes
-        cache.delete('employment_entries')
-        cache.delete('employment_entry:'+str(self.employee.id))
+        cache.delete('enrollment_entries')
+        cache.delete('enrollment_entry:'+str(self.employee.id))
         return super().save(*args, **kwargs)
 
 

@@ -16,7 +16,6 @@ class EnrollmentViewSet(viewsets.ModelViewSet):
         if not queryset:
             queryset = EnrollmentEntry.objects.all()
             cache.set(key, queryset, 60*60)  # Cache for an hour
-            print('test')
         return queryset
 
 

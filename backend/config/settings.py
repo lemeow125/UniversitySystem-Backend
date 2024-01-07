@@ -252,7 +252,7 @@ LOGGING = {
     'disable_existing_loggers': False,
     'handlers': {
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',
             'class': 'logging.StreamHandler',
         },
         'mail_admins': {
@@ -262,7 +262,7 @@ LOGGING = {
     },
     'root': {
         'handlers': ['console', 'mail_admins'],
-        'level': 'DEBUG',
+        'level': 'INFO',
     },
 }
 logger = logging.getLogger(__name__)
