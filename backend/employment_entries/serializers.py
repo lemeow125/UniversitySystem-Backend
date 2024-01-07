@@ -32,6 +32,6 @@ class EmploymentEntrySerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         rep = super().to_representation(instance)
-        rep['employee'] = CustomUserSerializer(instance.student).data
-        rep['department'] = DepartmentSerializer(instance.course).data
+        rep['employee'] = CustomUserSerializer(instance.employee).data
+        rep['department'] = DepartmentSerializer(instance.department).data
         return rep

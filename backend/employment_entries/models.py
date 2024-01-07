@@ -4,6 +4,8 @@ from departments.models import Department
 from django.utils.timezone import now
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
+from django.core.cache import cache
+import logging
 
 
 class EmploymentEntry(models.Model):
@@ -20,6 +22,12 @@ class EmploymentEntry(models.Model):
 
     def __str__(self):
         return f"{self.employee} employed in {self.department}"
+
+    def save(self, *args, **kwargs):
+        # Cache invalidation on changes
+        cache.delete('employment_entries')
+        cache.delete('employment_entry:'+str(self.employee.id))
+        return super().save(*args, **kwargs)
 
 
 @receiver(post_migrate)

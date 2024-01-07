@@ -6,6 +6,6 @@ router = DefaultRouter()
 router.register(r'', views.EmploymentViewSet, basename="Employment Entries")
 
 urlpatterns = [
-    path('', include(router.urls)),
     path('self/', views.SelfEmploymentViewSet.as_view()),
+    path('', include(router.urls)),
 ]

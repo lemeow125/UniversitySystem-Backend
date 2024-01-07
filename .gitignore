@@ -67,6 +67,7 @@ db.sqlite3-journal
 .env
 static/
 media/
+postgres_data/
 
 # Flask stuff:
 instance/

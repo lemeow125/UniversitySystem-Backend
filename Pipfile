@@ -21,6 +21,8 @@ channels = {version = "*", extras = ["daphne"]}
 channels-redis = "*"
 drf-extra-fields = "*"
 django-resized = "*"
+daphne = "*"
+django-redis = "*"
 
 [dev-packages]
 

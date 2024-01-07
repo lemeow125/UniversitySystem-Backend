@@ -3,12 +3,13 @@ version: "3.9"
 services:
   # Django Backend
   django_backend:
+    env_file: .env
     build:
       context: .
       dockerfile: Dockerfile
-    image: UniversitySystem-Backend:latest
+    image: university_system_backend:latest
     ports:
-      - "8094:8000" # Expose port 8094 for the web server
+      - "8000:8000"
     environment:
       - PYTHONBUFFERED=1
     command:
@@ -19,12 +20,26 @@ services:
       ]
     volumes:
       - .:/code # For hotreloading
+    depends_on:
+      - redis
+      - postgres
 
   # Redis Server
   redis:
     image: redis:latest
     ports:
-      - "6379:6379"
+      - "${REDIS_PORT}:6379"
+
+  postgres:
+    image: postgres
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
 
 volumes:
   university_system:

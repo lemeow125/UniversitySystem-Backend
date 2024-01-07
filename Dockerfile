@@ -12,14 +12,11 @@ WORKDIR /code
 # Mirror the current directory to the working directory for hotreloading
 ADD . /code/
 
-# Install pipenv
+# Copy the .env file
+COPY .env /.env
+
+# Install packages
 RUN pip install --no-cache-dir -r requirements.txt
-
-# Make migrations
-RUN python backend/manage.py makemigrations
-
-# Run custom migrate
-RUN python backend/manage.py migrate
 
 # Generate DRF Spectacular Documentation
 RUN python backend/manage.py spectacular --color --file backend/schema.yml

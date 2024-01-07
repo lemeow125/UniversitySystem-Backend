@@ -3,6 +3,7 @@ from django.utils.timezone import now
 from django.db.models.signals import post_migrate
 from django.dispatch import receiver
 from curriculums.models import Curriculum
+from django.core.cache import cache
 
 
 class Course(models.Model):
@@ -14,6 +15,11 @@ class Course(models.Model):
 
     def __str__(self):
         return f"{self.name}"
+
+    def save(self, *args, **kwargs):
+        # Cache invalidation on changes
+        cache.delete('courses')
+        return super().save(*args, **kwargs)
 
 
 @receiver(post_migrate)

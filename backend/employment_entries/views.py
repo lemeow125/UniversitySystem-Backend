@@ -3,6 +3,7 @@ from rest_framework import generics, viewsets
 from employment_entries.serializers import EmploymentEntrySerializer
 from employment_entries.models import EmploymentEntry
 from users.permissions import IsHiringStaffOrReadOnly
+from django.core.cache import cache
 
 
 class EmploymentViewSet(viewsets.ModelViewSet):
@@ -10,7 +11,12 @@ class EmploymentViewSet(viewsets.ModelViewSet):
     serializer_class = EmploymentEntrySerializer
 
     def get_queryset(self):
-        return EmploymentEntry.objects.all()
+        key = 'employment_entries'
+        queryset = cache.get(key)
+        if not queryset:
+            queryset = EmploymentEntry.objects.all()
+            cache.set(key, queryset, 60*60)  # Cache for an hour
+        return queryset
 
 
 class SelfEmploymentViewSet(generics.ListAPIView):
@@ -19,5 +25,10 @@ class SelfEmploymentViewSet(generics.ListAPIView):
     serializer_class = EmploymentEntrySerializer
 
     def get_queryset(self):
-        user = self.kwargs['id']
-        return EmploymentEntry.objects.filter(employee=user)
+        user = self.request.user
+        key = ('employment_entry:'+str(user.id))
+        queryset = cache.get(key)
+        if not queryset:
+            queryset = EmploymentEntry.objects.filter(employee=user.id)
+            cache.set(key, queryset, 60*60)  # Cache for an hour
+        return queryset

@@ -1,31 +1,44 @@
 -i https://pypi.org/simple
 annotated-types==0.6.0; python_version >= '3.8'
 asgiref==3.7.2; python_version >= '3.7'
-attrs==23.1.0; python_version >= '3.7'
+async-timeout==4.0.3; python_full_version <= '3.11.2'
+attrs==23.2.0; python_version >= '3.7'
+autobahn==23.6.2; python_version >= '3.9'
+automat==22.10.0
 certifi==2023.11.17; python_version >= '3.6'
 cffi==1.16.0; python_version >= '3.8'
+channels[daphne]==4.0.0
+channels-redis==4.1.0
 charset-normalizer==3.3.2; python_full_version >= '3.7.0'
 click==8.1.7; python_version >= '3.7'
 colorama==0.4.6; platform_system == 'Windows'
+constantly==23.10.4; python_version >= '3.8'
 cryptography==41.0.7; python_version >= '3.7'
+daphne==4.0.0
 defusedxml==0.8.0rc2; python_version >= '3.6'
-django==5.0
+django==5.0.1
 django-cors-headers==4.3.1
 django-extra-fields==3.0.2
+django-redis==5.4.0
+django-resized==1.0.2
 django-session-jwt==0.10.19
 django-simple-history==3.4.0
 django-templated-mail==1.1.1
-django-unfold==0.18.1
+django-unfold==0.19.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.1; python_version >= '3.8'
 djoser==2.2.2
 dotty-dict==1.3.1; python_version >= '3.5' and python_version < '4.0'
+drf-extra-fields==3.7.0
 drf-spectacular[sidecar]==0.27.0
-drf-spectacular-sidecar==2023.12.1
+drf-spectacular-sidecar==2024.1.1
+filetype==1.2.0
 gitdb==4.0.11; python_version >= '3.7'
 gitpython==3.1.40; python_version >= '3.7'
+hyperlink==21.0.0
 idna==3.6; python_version >= '3.5'
 importlib-resources==6.1.1; python_version >= '3.8'
+incremental==22.10.0
 inflection==0.5.1; python_version >= '3.5'
 jinja2==3.1.2; python_version >= '3.7'
 jsonschema==4.20.0; python_version >= '3.8'
@@ -33,34 +46,46 @@ jsonschema-specifications==2023.12.1; python_version >= '3.8'
 markdown-it-py==3.0.0; python_version >= '3.8'
 markupsafe==2.1.3; python_version >= '3.7'
 mdurl==0.1.2; python_version >= '3.7'
+msgpack==1.0.7; python_version >= '3.8'
 oauthlib==3.2.2; python_version >= '3.6'
-pillow==10.1.0
+pillow==10.2.0
 psycopg2==2.9.9
+pyasn1==0.5.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
+pyasn1-modules==0.3.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5'
 pycparser==2.21
 pydantic==2.5.3; python_version >= '3.7'
 pydantic-core==2.14.6; python_version >= '3.7'
 pygments==2.17.2; python_version >= '3.7'
 pyjwt==2.8.0; python_version >= '3.7'
+pyopenssl==23.3.0
 python-dotenv==1.0.0
-python-gitlab==4.2.0; python_full_version >= '3.8.0'
+python-gitlab==4.3.0; python_full_version >= '3.8.0'
 python-semantic-release==8.7.0; python_version >= '3.7'
 python3-openid==3.2.0
 pytz==2023.3.post1
 pyyaml==6.0.1; python_version >= '3.6'
-referencing==0.32.0; python_version >= '3.8'
+redis==5.0.1; python_version >= '3.7'
+referencing==0.32.1; python_version >= '3.8'
 requests==2.31.0; python_version >= '3.7'
 requests-oauthlib==1.3.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 requests-toolbelt==1.0.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 rich==13.7.0; python_full_version >= '3.7.0'
-rpds-py==0.15.2; python_version >= '3.8'
+rpds-py==0.16.2; python_version >= '3.8'
+service-identity==23.1.0
+setuptools==69.0.3; python_version >= '3.8'
 shellingham==1.5.4; python_version >= '3.7'
+six==1.16.0; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'
 smmap==5.0.1; python_version >= '3.7'
 social-auth-app-django==5.4.0; python_version >= '3.8'
 social-auth-core==4.5.1; python_version >= '3.8'
 sqlparse==0.4.4; python_version >= '3.5'
 tomlkit==0.12.3; python_version >= '3.7'
+twisted[tls]==23.10.0; python_full_version >= '3.8.0'
+twisted-iocpsupport==1.0.4; platform_system == 'Windows'
+txaio==23.1.1; python_version >= '3.7'
 typing-extensions==4.9.0; python_version >= '3.8'
-tzdata==2023.3; sys_platform == 'win32'
+tzdata==2023.4; sys_platform == 'win32'
 uritemplate==4.1.1; python_version >= '3.6'
 urllib3==2.1.0; python_version >= '3.8'
 whitenoise==6.6.0
+zope-interface==6.1; python_version >= '3.7'

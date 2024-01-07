@@ -1,9 +1,10 @@
+import logging
 from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+load_dotenv('../../.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -41,8 +42,16 @@ else:
     EMAIL_PORT = str(os.getenv('PROD_EMAIL_PORT'))
     EMAIL_USE_TLS = str(os.getenv('PROD_EMAIL_TLS'))
 
-# Application definition
 
+# Admin Panel JWT
+DJANGO_SESSION_JWT = {
+    "EXPIRES": 60 * 60 * 24 * 7,  # 1 Week Validity
+    'KEY': os.getenv('SECRET_KEY'),
+    'SESSION_FIELD': 'sk',
+}
+SESSION_COOKIE_NAME = 'sessionid'
+
+# Application definition
 INSTALLED_APPS = [
     'daphne',
     'unfold',
@@ -107,8 +116,12 @@ ASGI_APPLICATION = "config.asgi.application"
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST', 'postgres'),
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
 
@@ -213,14 +226,6 @@ SIMPLE_JWT = {
     "REFRESH_TOKEN_LIFETIME": timedelta(minutes=10080),
 }
 
-# Admin Panel JWT
-DJANGO_SESSION_JWT = {
-    "EXPIRES": 60 * 60 * 24 * 7,  # 1 Week Validity
-    'KEY': os.getenv('SECRET_KEY'),
-    'SESSION_FIELD': 'sk',
-}
-SESSION_COOKIE_NAME = 'sessionid'
-
 # Redis Cache for Django Channel Websockets
 CHANNEL_LAYERS = {
     "default": {
@@ -231,5 +236,33 @@ CHANNEL_LAYERS = {
     },
 }
 
-SESSION_ENGINE = "django.contrib.sessions.backends.cache"
-SESSION_CACHE_ALIAS = "default"
+# Django/DRF Cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console', 'mail_admins'],
+        'level': 'DEBUG',
+    },
+}
+logger = logging.getLogger(__name__)

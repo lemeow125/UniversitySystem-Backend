@@ -8,3 +8,9 @@ This is a personal attempt to replicate most of the business functions required 
 - Student evaluation (Multiple Choice/Identification Quizzes)
 
 The backend project is built in Django, with support for REST APIs
+
+## Development
+
+- Create a copy of the `.env.sample` file and name it as `.env` in the same directory
+- Populate .env with values
+- Run `docker-compose up`
